@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Login Page</title>
+    <script src="https://cdn.counter.dev/script.js" data-id="78b200db-2e18-4f6c-a607-f2b943e923e6" data-utcoffset="7" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ios-bg: #050505;
+            --ios-card: rgba(28, 28, 30, 0.7);
+            --ios-blue: #0a84ff;
+            --ios-red: #ff3b30;
+            --ios-text: #ffffff;
+            --ios-secondary: #8e8e93;
+            --ios-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--ios-bg);
+            color: var(--ios-text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #particles-js {
+            position: fixed; inset: 0; z-index: 1;
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 320px;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .logo-area {
+            margin-bottom: 25px;
+        }
+
+        .logo-area i {
+            font-size: 60px;
+            color: var(--ios-red);
+            filter: drop-shadow(0 0 20px rgba(255, 59, 48, 0.6));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--ios-secondary);
+            margin-bottom: 30px;
+        }
+
+        .ios-group {
+            background: var(--ios-card);
+            backdrop-filter: blur(25px);
+            border-radius: 14px;
+            border: 1px solid var(--ios-border);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .ios-input-wrapper {
+            position: relative;
+        }
+
+        .ios-input-wrapper input {
+            width: 100%;
+            padding: 18px 16px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--ios-blue);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-login:active {
+            opacity: 0.7;
+            transform: scale(0.97);
+        }
+
+        .ios-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            display: none; justify-content: center; align-items: center;
+            z-index: 10000; backdrop-filter: blur(10px);
+        }
+
+        .ios-dialog {
+            width: 275px;
+            background: rgba(35, 35, 35, 0.9);
+            backdrop-filter: blur(30px);
+            border-radius: 14px;
+            text-align: center;
+            color: white;
+            animation: popUp 0.3s cubic-bezier(0.4, 0, 0.2, 1.4);
+            border: 0.5px solid rgba(255,255,255,0.1);
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-10px); }
+            80% { transform: translateX(10px); }
+        }
+
+        .dialog-content { padding: 20px 16px; }
+        .dialog-content h4 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+        .dialog-content p { font-size: 13px; color: #efefef; line-height: 1.4; }
+
+        .dialog-actions {
+            display: flex;
+            border-top: 0.5px solid rgba(255,255,255,0.15);
+        }
+
+        .dialog-btn {
+            flex: 1; padding: 13px;
+            background: transparent; border: none;
+            color: var(--ios-blue); font-size: 17px;
+            cursor: pointer;
+        }
+
+        .dialog-btn:active { background: rgba(255,255,255,0.05); }
+        .dialog-btn.bold { font-weight: 600; }
+        .dialog-btn.cancel { border-right: 0.5px solid rgba(255,255,255,0.15); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes popUp { from { transform: scale(1.1); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        footer { margin-top: 35px; font-size: 10px; color: var(--ios-secondary); letter-spacing: 2px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="login-container" id="main-box">
+        <div class="logo-area">
+            <i class="fas fa-ghost"></i>
+        </div>
+        <h2>VIP MODE</h2>
+        <p class="subtitle">Enter your key</p>
+
+        <div class="ios-group">
+            <div class="ios-input-wrapper">
+                <input type="text" id="accessKey" placeholder="Enter Key Here" autocomplete="off">
+            </div>
+        </div>
+
+        <button class="btn-login" onclick="validateKey()">Activate</button>
+
+        <footer>&copy; 2026 NEVERS MODS TEAM
+        </footer>
+    </div>
+
+    <div id="ios-overlay" class="ios-overlay">
+        <div class="ios-dialog" id="dialog-box">
+            <div class="dialog-content">
+                <h4 id="alert-title">Title</h4>
+                <p id="alert-msg">Message content.</p>
+            </div>
+            <div class="dialog-actions">
+                <button class="dialog-btn cancel" id="btn-cancel" onclick="closeAlert()">Tutup</button>
+                <button class="dialog-btn bold" id="btn-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const validKeys = ["key", "key1", "key2", "key3"];
+
+        function validateKey() {
+            const inputKey = document.getElementById('accessKey').value.trim();
+            const mainBox = document.getElementById('main-box');
+
+            if (validKeys.includes(inputKey)) {
+                showAlert("Access Granted", "Key valid! Sistem sedang memuat...", true, "https://ditzzzgamonnn123-create.github.io/Beranda-vip/");
+            } else {
+                mainBox.classList.add('shake');
+                setTimeout(() => mainBox.classList.remove('shake'), 400);
+                showAlert("Invalid Key", "Key yang Anda masukkan salah atau sudah kadaluarsa!", false);
+            }
+        }
+
+        function showAlert(title, msg, isRedirect, url = "") {
+            document.getElementById('alert-title').innerText = title;
+            document.getElementById('alert-msg').innerText = msg;
+            const overlay = document.getElementById('ios-overlay');
+            const btnOk = document.getElementById('btn-ok');
+            const btnCancel = document.getElementById('btn-cancel');
+
+            overlay.style.display = 'flex';
+
+            if (isRedirect) {
+                btnCancel.style.display = 'none';
+                btnOk.innerText = "Lanjutkan";
+                btnOk.style.display = 'block';
+                btnOk.onclick = function() { window.location.href = url; };
+            } else {
+                btnCancel.style.display = 'block';
+                btnOk.style.display = 'none';
+            }
+        }
+
+        function closeAlert() {
+            document.getElementById('ios-overlay').style.display = 'none';
+        }
+
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ff3b30" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2, "random": true },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 120, "color": "#ff3b30", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
